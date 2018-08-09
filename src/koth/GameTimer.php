@@ -6,19 +6,18 @@
  * Time: 
  */
 namespace koth;
-use pocketmine\scheduler\PluginTask;
-class GameTimer extends PluginTask
+use pocketmine\scheduler\Task;
+class GameTimer extends Task
 {
     private $plugin;
     private $arena;
     private $time;
     public function __construct(KothMain $owner, KothArena $arena){
-        parent::__construct($owner);
         $this->plugin = $owner;
         $this->arena = $arena;
         $this->time = $owner->getData("game_time") * 60;
     }
-    public function onRun(int $currentTick){
+    public function onRun(int $currentTick) : void{
         $time = $this->time--;
         if ($time < 1){
             $this->arena->endGame();

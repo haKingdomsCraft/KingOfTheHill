@@ -83,6 +83,7 @@ class KothCommand {
         }
     return true;
     }
+    return true;
     }
     public function sendHelp(CommandSender $sender){
         $sender->sendMessage("§7--- §a§lKoth §b§lCommands§r§7---");

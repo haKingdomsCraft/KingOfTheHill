@@ -26,10 +26,10 @@ class KothCommand {
              }
                 if (strtolower($args[0]) === 'join'){
                     if ($this->plugin->sendToKoth($sender)){
-                        $sender->sendMessage($this->plugin->getData("Joined"));
+                        $sender->sendMessage($this->plugin->getData("joined"));
                         return false;
                     }else{
-                        $sender->sendMessage($this->plugin->getData("Not_Running"));
+                        $sender->sendMessage($this->plugin->getData("not_running"));
                     return true;
                     }
                 }
@@ -78,13 +78,11 @@ class KothCommand {
                     if (!$sender->isOp()) $sender->sendMessage($this->plugin->prefix()."§aJoin Game With §b/koth Join");
                         return true;
                 }
+                return true;
                 }
-                } else {
-            }
-            $sender->sendMessage("§cError Cant Run That In Console");
-            return true;
         }
     return true;
+    }
     }
     public function sendHelp(CommandSender $sender){
         $sender->sendMessage("§7--- §a§lKoth §b§lCommands§r§7---");

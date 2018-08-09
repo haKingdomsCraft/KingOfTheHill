@@ -111,7 +111,7 @@ class KothArena
     public function won(Player $player){
         $prefix = $this->plugin->prefix();
         $msg = $this->plugin->getData("win");
-        $msg = str_replace("{player}",$player->getName(),$msg);
+        $msg = str_replace("{player}","{faction}",$player->getName(),$this->plugin->getFaction(),$msg);
         $msg = $prefix.$msg;
         $this->plugin->getServer()->broadcastMessage($msg);
         $this->giveRewards($player);
@@ -120,7 +120,7 @@ class KothArena
     public function removePlayer(Player $player){
         if (isset($this->players[$player->getName()])) unset($this->players[$player->getName()]);
     }
-    public function sendProgress(Player $player, $time){
+    public function sendProgress(Player $player, int $time){
         $tip = $this->plugin->getData("progress");
         $max = $this->plugin->getData("capture_time");
         $time = $this->plugin->getData("capture_time") - $time;
@@ -138,7 +138,7 @@ class KothArena
         }
         $this->resetGame();
     }
-    public function sendPopup($msg){
+    public function sendPopup(string $msg){
         foreach ($this->players as $player => $time){
             $p = $this->plugin->getServer()->getPlayer($player);
             if ($p instanceof Player) $p->sendPopup($msg);

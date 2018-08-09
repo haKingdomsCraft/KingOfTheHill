@@ -24,7 +24,6 @@ class KothCommand {
              if (strtolower($args[0]) == 'help') {
                  $sender->sendMessage("§6Koth commands help \n\n§b/koth join - §aJoin a koth game event");
              }
-                 if (isset($args[0])){
                 if (strtolower($args[0]) === 'join'){
                     if ($this->plugin->sendToKoth($sender)){
                         $sender->sendMessage($this->plugin->getData("Joined"));
@@ -80,7 +79,7 @@ class KothCommand {
                         return true;
                 }
                 }
-                }
+                } else {
             }
             $sender->sendMessage("§cError Cant Run That In Console");
             return true;

@@ -8,8 +8,7 @@
 namespace koth;
 use pocketmine\command\{CommandSender, Command};
 use pocketmine\Player;
-class KothCommand extends Command
-{
+class KothCommand {
     private $plugin;
     public function __construct(KothMain $main){
         $this->plugin = $main;

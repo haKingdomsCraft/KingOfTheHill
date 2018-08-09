@@ -9,7 +9,7 @@ namespace koth;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\level\Position;
 use pocketmine\Player;
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 class KothArena
 {
     private $running = false;
@@ -19,8 +19,7 @@ class KothArena
     private $p2;
     public $plugin;
     private $timer = null;
-    public function __construct(KothMain $main, $spawns, $capture)
-    {
+    public function __construct(KothMain $main, int $spawns, int $capture){
         $this->plugin = $main;
         foreach ($spawns as $spawn){
             $l = explode(":",$spawn);
@@ -49,14 +48,14 @@ class KothArena
     }
     public function preStart(){
         $task = new PreGameTimer($this->plugin,$this);
-        $handler = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask($task,20);
+        $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task,20);
         $task->setHandler($handler);
         $this->timer = $task;
         $this->running = true;
     }
     public function startGame(){
         $task = new GameTimer($this->plugin,$this);
-        $handler = $this->plugin->getServer()->getScheduler()->scheduleRepeatingTask($task,20);
+        $handler = $this->plugin->getScheduler()->scheduleRepeatingTask($task,20);
         $task->setHandler($handler);
         $this->timer = $task;
     }
@@ -87,7 +86,7 @@ class KothArena
         $this->players = [];
         $this->running = false;
         $timer = $this->timer;
-        if ($timer instanceof PluginTask && !$timer->getHandler()->isCancelled()) $timer->getHandler()->cancel();
+        if ($timer instanceof Task && !$timer->getHandler()->isCancelled()) $timer->getHandler()->cancel();
         $this->timer = null;
     }
     public function isRunning() : bool {

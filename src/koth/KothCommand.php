@@ -33,27 +33,27 @@ class KothCommand {
                     return true;
                     }
                 }
-                if (strtolower($args[0]) === 'setspawn'){
+                if ($args[0] === 'setspawn'){
                     if (!$sender->hasPermission("koth.start")){
                     $this->plugin->setPoint($sender,'spawn');
                     $sender->sendMessage("§dSuccessfully Added SpawnPoint");
                     return true;
                 }
-                if (strtolower($args[0]) === 'p1'){
+                if ($args[0] === 'p1'){
                     if (!$sender->hasPermission("koth.start")){
                     $this->plugin->setPoint($sender,'p1');
                     $sender->sendMessage("§dSuccessfully Added P1 Point §5(Make Sure To Set P2)");
                         return true;
                     }
                 }
-                if (strtolower($args[0]) === 'p2'){
+                if ($args[0] === 'p2'){
                     if (!$sender->hasPermission("koth.start")){
                     $this->plugin->setPoint($sender,'p2');
                     $sender->sendMessage("§dSuccessfully Added P2 Point");
                     return true;
                     }
                 }
-                if (strtolower($args[0]) === 'start'){
+                if ($args[0] == 'start'){
                     if (!$sender->hasPermission("koth.start")){
                     if ($this->plugin->startArena()){
                         $sender->sendMessage("§dKoth Event Started");
@@ -64,7 +64,7 @@ class KothCommand {
                     }
                     }
                 }
-                if (strtolower($args[0]) === 'stop'){
+                if ($args[0] === 'stop'){
                     if (!$sender->hasPermission("koth.stop")){
                     if ($this->plugin->forceStop()){
                         $sender->sendMessage("§cKoth Event Force Stopped");

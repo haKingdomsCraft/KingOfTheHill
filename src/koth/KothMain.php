@@ -15,7 +15,7 @@ class KothMain extends PluginBase
     private $c;
     private $arena = null;
     private $fac;
-    public function onEnable(){
+    public function onEnable() : void{
         @mkdir($this->getDataFolder());
         $this->msg = new Config($this->getDataFolder()."config.yml",Config::YAML,[
             "capture_time" => 100,
@@ -57,7 +57,7 @@ class KothMain extends PluginBase
     public function getFaction(Player $player){
         return $this->fac == null ? "" : $this->fac->getPlayerFaction($player->getName());
     }
-    public function onDisable(){
+    public function onDisable() : void{
         $arena = $this->arena;
         if ($arena instanceof KothArena){
             $arena->resetGame();

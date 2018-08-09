@@ -85,6 +85,7 @@ class KothCommand {
             $sender->sendMessage("§cError Cant Run That In Console");
             return true;
         }
+    return true;
     }
     public function sendHelp(CommandSender $sender){
         $sender->sendMessage("§7--- §a§lKoth §b§lCommands§r§7---");

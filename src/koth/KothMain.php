@@ -9,6 +9,8 @@ namespace koth;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\command\CommandSender;
+use pocketmine\command\Command;
 class KothMain extends PluginBase
 {
     private $msg;
@@ -38,6 +40,7 @@ class KothMain extends PluginBase
                 "give {player} diamond 2"
         ]
         ]);
+         $this->kcmd = new KothCommand($this);
         $this->c = new Config($this->getDataFolder()."arena.yml", Config::YAML);
         $this->getLogger()->notice("KOTH Plugin Enabled!");
         $all = $this->c->getAll();
@@ -49,14 +52,15 @@ class KothMain extends PluginBase
         }
         //Register Listener
         $this->getServer()->getPluginManager()->registerEvents(new KothListener($this),$this);
-        //Register Command
-        $this->getServer()->getCommandMap()->register("koth", new KothCommand("koth",$this));
         $this->fac = $this->getServer()->getPluginManager()->getPlugin("FactionsPro");
         if ($this->fac == null) $this->getLogger()->critical("FactionsPro Plugin not found... Disabled {faction} support!");
-    }
+        }
     public function getFaction(Player $player){
         return $this->fac == null ? "" : $this->fac->getPlayerFaction($player->getName());
     }
+         public function onCommand(CommandSender $sender, Command $command, string $label, array $args) :bool {
+        return $this->kcmd->onCommand($sender, $command, $label, $args);
+         }
     public function onDisable() : void{
         $arena = $this->arena;
         if ($arena instanceof KothArena){

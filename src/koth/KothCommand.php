@@ -10,24 +10,19 @@ use pocketmine\command\{CommandSender, Command};
 use pocketmine\Player;
 class KothCommand {
     private $plugin;
-    public function __construct(KothMain $main){
+    public function __construct($name, KothMain $main){
+        parent::__construct($name, "");
         $this->plugin = $main;
     }
-    public function onCommand(CommandSender $sender, Command $command, string $label, array $args) : bool{
+    public function execute(CommandSender $sender, string $commandLabel, array $args) : bool{
         if ($sender instanceof Player){
-            if (strtolower($command->getName()) === "koth") {
-                if (empty($args)) {
-                    $sender->sendMessage("§aPlease use: §b/koth help §6for a list of koth help commands.");
-                    return true;
-                }
-            }
              if (strtolower($args[0]) == 'help') {
                  $sender->sendMessage("§6Koth commands help \n\n§b/koth join - §aJoin a koth game event");
+                 return true;
              }
                 if (strtolower($args[0]) === 'join'){
                     if ($this->plugin->sendToKoth($sender)){
                         $sender->sendMessage($this->plugin->getData("joined"));
-                        return false;
                     }else{
                         $sender->sendMessage($this->plugin->getData("not_running"));
                     return true;

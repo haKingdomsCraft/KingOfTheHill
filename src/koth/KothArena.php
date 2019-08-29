@@ -9,7 +9,7 @@ namespace koth;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\level\Position;
 use pocketmine\Player;
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 class KothArena
 {
     private $running = false;
@@ -33,7 +33,7 @@ class KothArena
         $this->p2 = new Position($l[0],$l[1],$l[2],$main->getServer()->getLevelByName($l[3]));
     }
     public function inCapture(Player $player) : bool {
-        $l = $player->getPosition();
+        $l = $player;
         $x = $l->getX();
         $z = $l->getZ();
         $y = $l->getY();
@@ -87,7 +87,7 @@ class KothArena
         $this->players = [];
         $this->running = false;
         $timer = $this->timer;
-        if ($timer instanceof PluginTask && !$timer->getHandler()->isCancelled()) $timer->getHandler()->cancel();
+        if ($timer instanceof Task && !$timer->getHandler()->isCancelled()) $timer->getHandler()->cancel();
         $this->timer = null;
     }
     public function isRunning() : bool {

@@ -32,7 +32,7 @@ class KothArena
         $this->p2 = new Position($l[0],$l[1],$l[2],$main->getServer()->getLevelByName($l[3]));
     }
     public function inCapture(Player $player) : bool {
-        $l = $player->getPosition();
+        $l = $player;
         $x = $l->getX();
         $z = $l->getZ();
         $y = $l->getY();
